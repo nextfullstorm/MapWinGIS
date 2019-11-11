@@ -367,6 +367,25 @@ bool SQLiteCache::get_TileExists(BaseProvider* provider, int scale, int x, int y
 // Extracts a tile from the database
 TileCore* SQLiteCache::get_Tile(BaseProvider* provider, int scale, int x, int y)
 {
+	try
+	{
+		for (size_t i = 0; i < provider->get_SubProviders()->size(); i++)
+		{
+			int providerId = (*provider->get_SubProviders())[i]->Id;
+			auto fmt = (*provider->get_SubProviders())[i]->get_UrlFormat();
+
+			if (fmt.Find("file:///", 0) == 0)
+			{
+				return provider->GetTileImage(CPoint(x, y), scale);
+			}
+		}
+	}
+	catch (const std::exception&)
+	{
+		CallbackHelper::ErrorMsg("SQLiteCache: exception on getting tile.");
+		return nullptr;
+	}
+	
 	TileCore* tile = NULL;
 	
 	if(!Initialize(SqliteOpenMode::OpenIfExists))
