@@ -221,6 +221,8 @@ void CMapView::Clear()
 void CMapView::Startup()
 {
 	InitializeIIDs(&IID_DMap, &IID_DMapEvents);
+
+	GdiplusStartup();
 	
 	Utility::InitGdiPlusFont(&_fontCourier, L"Courier New", 9.0f);
 	Utility::InitGdiPlusFont(&_fontArial, L"Arial", 9.0f);
@@ -490,6 +492,10 @@ void CMapView::Shutdown()
 	}
 
 	delete _ttipCtrl;
+
+	// 
+	TileCacheManager::CloseAll();
+	GdiplusShutdown();
 }
 
 // ********************************************************************

@@ -75,7 +75,7 @@ BOOL CMapWinGISApp::InitInstance()
 	gMemLeakDetect.stopped = false;
 #endif
 
-	CMapView::GdiplusStartup();
+	//CMapView::GdiplusStartup();
 
 	return COleControlModule::InitInstance() && InitATL();
 }
@@ -110,7 +110,7 @@ int CMapWinGISApp::ExitInstance()
 
 	parser::ReleaseFunctions();
 
-	CMapView::GdiplusShutdown();
+	//CMapView::GdiplusShutdown();
 
 	_Module.Term();
 	return COleControlModule::ExitInstance();
