@@ -638,6 +638,9 @@ void CMapView::OnLButtonDown(UINT nFlags, CPoint point)
 			{
 				this->SetCapture();
 				_dragging.Operation = DragPanning;
+
+				if (m_sendMouseDown == TRUE)
+					this->FireMouseDown(MK_LBUTTON, (short)vbflags, x, y);
 			}
 			break;
 		case cmMeasure:
