@@ -165,6 +165,7 @@ void CLabelDrawer::DrawLabels(ILabels* labels)
 			{
 				CLabelInfo* lbl = (*parts)[j];
 
+				if (!lbl->visible) continue;
 				if (lbl->x < _extents->left)   continue;
 				if (lbl->x > _extents->right)  continue;
 				if (lbl->y < _extents->bottom) continue;
