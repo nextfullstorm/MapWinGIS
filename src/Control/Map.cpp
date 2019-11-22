@@ -310,6 +310,13 @@ void CMapView::Startup()
 
 	// initialize cURL
 	curl_global_init(CURL_GLOBAL_ALL);
+
+	CPLSetErrorHandler([](CPLErr eErrClass, int err_no, const char* msg) 
+		{
+			char str[500];
+			sprintf(str, "gdal error: class %d, # %d, msg: %s\n", eErrClass, err_no, msg);
+			OutputDebugString(str);
+		});
 }
 
 // **********************************************************************
