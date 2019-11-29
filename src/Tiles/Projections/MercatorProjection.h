@@ -59,5 +59,7 @@ public:
 
 	// converts tile coordinates to decimal degrees
 	void FromXYToLatLng(CPoint pnt, int zoom, PointLatLng &ret);
+
+	virtual RectLatLng CalculateGeogBounds(CPoint pnt, int zoom);
 	
 };
